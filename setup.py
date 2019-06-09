@@ -50,7 +50,7 @@ setup(
     name='python-doi',
     packages=find_packages(where="src"),
     package_dir={"": "src"},
-    url='https://github.com/alejandrogallo/doi',
+    url='https://github.com/papis/python-doi',
     version=version,
     zip_safe=False,
 )

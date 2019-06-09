@@ -5,12 +5,12 @@ python-doi
    :alt: python-doi on the Python Package Index
    :target: https://pypi.python.org/pypi/python-doi
 
-.. image:: https://img.shields.io/travis/alejandrogallo/python-doi.svg
+.. image:: https://img.shields.io/travis/papis/python-doi.svg
    :alt: Travis Continuous Integration
-   :target: https://travis-ci.org/alejandrogallo/python-doi
-.. image:: https://coveralls.io/repos/github/alejandrogallo/python-doi/badge.svg?branch=master
+   :target: https://travis-ci.org/papis/python-doi
+.. image:: https://coveralls.io/repos/github/papis/python-doi/badge.svg?branch=master
    :alt: Coveralls
-   :target: https://coveralls.io/github/alejandrogallo/python-doi?branch=master
+   :target: https://coveralls.io/github/papis/python-doi?branch=master
 .. image:: https://readthedocs.org/projects/python-doi/badge/?version=latest
    :alt: Documentation Status
    :target: https://python-doi.readthedocs.io/en/latest/?badge=latest
@@ -44,9 +44,9 @@ To install the latest development version of python-doi from `Github`_.
 
 .. code-block:: console
 
-    $ pip install git+https://github.com/alejandrogallo/python-doi.git@master#egg=doi
+    $ pip install git+https://github.com/papis/python-doi.git@master#egg=doi
 
-.. _Github: https://github.com/alejandrogallo/python-doi
+.. _Github: https://github.com/papis/python-doi
 
 Usage
 -----

@@ -66,8 +66,8 @@ version = release = doi.__version__
 
 pygments_style = 'sphinx'
 extlinks = {
-    'issue': ('https://github.com/alejandrogallo/doi/issues/%s', '#'),
-    'pr': ('https://github.com/alejandrogallo/doi/pull/%s', 'PR #'),
+    'issue': ('https://github.com/papis/python-doi/issues/%s', '#'),
+    'pr': ('https://github.com/papis/python-doi/pull/%s', 'PR #'),
 }
 
 # autodoc settings

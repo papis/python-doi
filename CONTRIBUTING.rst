@@ -13,7 +13,7 @@ Types of Contributions
 Report Bugs
 ~~~~~~~~~~~
 
-Report bugs at https://github.com/alejandrogallo/doi/issues.
+Report bugs at https://github.com/papis/python-doi/issues.
 
 If you are reporting a bug, please include:
 
@@ -37,7 +37,7 @@ articles, and such.
 Submit Feedback
 ~~~~~~~~~~~~~~~
 
-The best way to send feedback is to file an issue at https://github.com/alejandrogallo/doi/issues.
+The best way to send feedback is to file an issue at https://github.com/papis/python-doi/issues.
 
 If you are proposing a feature:
 
@@ -51,7 +51,7 @@ Get Started!
 
 In short,
 
-1. Clone the repository from ``git@github.com:alejandrogallo/doi.git``
+1. Clone the repository from ``git@github.com:papis/python-doi.git``
 2. Fork the repo on GitHub to your personal account.
 3. Add your fork as a remote.
 4. Pull in the latest changes from the master branch.
@@ -77,6 +77,6 @@ Before you submit a pull request, check that it meets these guidelines:
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
    feature to the list in README.rst.
-3. Check https://travis-ci.org/alejandrogallo/doi/pull_requests
+3. Check https://travis-ci.org/papis/python-doi/pull_requests
    and make sure that the tests pass for all supported Python versions.
 
