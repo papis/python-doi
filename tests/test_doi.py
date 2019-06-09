@@ -26,7 +26,7 @@ def test_validate_doi():
             'https://www.tandfonline.com/doi/full/10.1080/14786442408634457'),
         ('10.1021/jp003647e', 'https://pubs.acs.org/doi/10.1021/jp003647e'),
         ('10.1016/S0009-2614(97)04014-1',
-            'http://linkinghub.elsevier.com/retrieve/pii/S0009261497040141'),
+            'https://linkinghub.elsevier.com/retrieve/pii/S0009261497040141'),
     ]
     for doi, url in data:
         assert(url == validate_doi(doi))
