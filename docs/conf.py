@@ -40,6 +40,7 @@ extensions = [
     'sphinx.ext.todo',
     'dollarmath',
     'sphinx.ext.inheritance_diagram',
+    'sphinx_autodoc_typehints',
 ]
 if os.getenv('SPELLCHECK'):
     extensions += 'sphinxcontrib.spelling',

@@ -1,28 +1,26 @@
 import re
+import sys
 import logging
 
-
 __version__ = '0.1.1'
-
-
 logger = logging.getLogger("doi")
 
 
-def pdf_to_doi(filepath, maxlines=float('inf')):
-    """Try to get doi from a filepath, it looks for a regex in the binary
-    data and returns the first doi found, in the hopes that this doi
+def pdf_to_doi(filepath, maxlines=None):
+    """Try to get DOI from a filepath. It looks for a regex in the binary
+    data and returns the first DOI found, in the hopes that this DOI
     is the correct one.
 
-    :param filepath: Path to the pdf file
-    :type  filepath: str
+    :param filepath: Path to the pdf file.
     :param maxlines: Maximum number of lines that should be checked
-        For some documnets, it would spend a long time trying to look for
-        a doi, and dois in the middle of documents don't tend to be the correct
-        doi of the document.
-    :type  maxlines: int
-    :returns: DOI or None
-    :rtype:  str or None
+        For some documents, it could spend a long time trying to look for
+        a DOI, and DOIs in the middle of documents don't tend to be the correct
+        DOI of the document.
+    :returns: DOI or ``None``.
     """
+    if maxlines is None:
+        maxlines = sys.maxsize
+
     with open(filepath, 'rb') as fd:
         for j, line in enumerate(fd):
             doi = find_doi_in_text(line.decode('ascii', errors='ignore'))
@@ -30,38 +28,32 @@ def pdf_to_doi(filepath, maxlines=float('inf')):
                 return doi
             if j > maxlines:
                 return None
-        else:
-            return None
+        return None
 
 
 def validate_doi(doi):
-    """We check that the DOI can be resolved by official means.  If so, we
-    return the resolved URL, otherwise, we return None (which means the DOI is
-    invalid).
+    """We check that the DOI can be resolved by
+    `official means <http://www.doi.org/factsheets/DOIProxy.html>`_. If so, we
+    return the resolved URL, otherwise, we return ``None`` (which means the
+    DOI is invalid).
 
-    http://www.doi.org/factsheets/DOIProxy.html
-
-    :param doi: Doi identificator
-    :type  doi: str
-    :returns: It returns the url assigned to the doi if everything went right
-    :rtype: str
-
-    :raises ValueError: Whenever the doi is not valid
+    :param doi: Identifier.
+    :returns: The URL assigned to the DOI or ``None``.
     """
     from urllib.error import HTTPError, URLError
     import urllib.request
     import urllib.parse
     import json
     url = "https://doi.org/api/handles/{doi}".format(doi=doi)
-    logger.debug('handle url %s' % url)
+    logger.debug('handle url %s', url)
     request = urllib.request.Request(url)
 
     try:
         result = json.loads(urllib.request.urlopen(request).read().decode())
         if 'values' in result:
-            url = [v['data']['value']
+            urls = [v['data']['value']
                     for v in result['values'] if v.get('type') == 'URL']
-            return url[0] if url else None
+            return urls[0] if urls else None
     except HTTPError:
         raise ValueError('HTTP 404: DOI not found')
     except URLError as e:
@@ -80,11 +72,11 @@ def validate_doi(doi):
 
 
 def get_clean_doi(doi):
-    """Check if doi is actually a url and in that case just get
-    the exact doi.
+    """Check if the DOI is actually a URL and in that case just get
+    the exact DOI.
 
-    :doi: String containing a doi
-    :returns: The pure doi
+    :param doi: String containing a DOI.
+    :returns: The extracted DOI.
     """
     doi = re.sub(r'%2F', '/', doi)
     # For pdfs
@@ -96,8 +88,10 @@ def get_clean_doi(doi):
 
 
 def find_doi_in_text(text):
-    """
-    Try to find a doi in a text
+    """Try to find a DOI in a text.
+
+    :param text: Text in which to look for DOI.
+    :returns: A DOI, if found, otherwise ``None``.
     """
     text = get_clean_doi(text)
     forbidden_doi_characters = r'"\s%$^\'<>@,;:#?&'
@@ -126,11 +120,16 @@ def find_doi_in_text(text):
 
 
 def get_real_url_from_doi(doi):
+    """Get a URL corresponding to a DOI.
+
+    :param doi: Identifier.
+    :returns: A URL for the DOI. If the DOI is invalid, return ``None``.
+    """
     url = validate_doi(doi)
-    if not url:
+    if url is None:
         return url
 
-    m = re.match('.*linkinghub\.elsevier.*/pii/([A-Z0-9]+).*', url, re.I)
+    m = re.match(r'.*linkinghub\.elsevier.*/pii/([A-Z0-9]+).*', url, re.I)
     if m:
         return ('https://www.sciencedirect.com/science/article/abs/pii/{pii}'
                 .format(pii=m.group(1)))

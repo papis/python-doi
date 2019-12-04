@@ -22,7 +22,8 @@ requirements = []
 
 dev_requirements = [
     'coverage', 'pytest', 'pytest-cov==2.5.0', 'twine', 'pep8',
-    'flake8', 'wheel', 'sphinx', 'sphinx-autobuild', 'sphinx_rtd_theme']
+    'flake8', 'wheel',
+    'sphinx', 'sphinx-autobuild', 'sphinx-autodoc-typehints', 'sphinx_rtd_theme']
 
 version = get_version('./src/doi/__init__.py')
 
@@ -34,9 +35,10 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Natural Language :: English',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
     ],
     description="Python package to work with Document Object Identifier (doi)",
     install_requires=requirements,

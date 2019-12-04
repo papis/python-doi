@@ -8,8 +8,7 @@ Welcome to python-doi's documentation!
    readme
    contributing
    authors
-   API
-===
+   api
 
 .. toctree::
    :maxdepth: 1
