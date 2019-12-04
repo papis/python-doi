@@ -50,6 +50,7 @@ setup(
     include_package_data=True,
     keywords='doi',
     name='python-doi',
+    package_data={"doi": ["py.typed"]},
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     url='https://github.com/papis/python-doi',

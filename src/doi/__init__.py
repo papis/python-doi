@@ -2,11 +2,14 @@ import re
 import sys
 import logging
 
+from typing import Optional
+
+
 __version__ = '0.1.1'
-logger = logging.getLogger("doi")
+logger = logging.getLogger("doi")   # type: logging.Logger
 
 
-def pdf_to_doi(filepath, maxlines=None):
+def pdf_to_doi(filepath: str, maxlines: Optional[int] = None) -> Optional[str]:
     """Try to get DOI from a filepath. It looks for a regex in the binary
     data and returns the first DOI found, in the hopes that this DOI
     is the correct one.
@@ -31,7 +34,7 @@ def pdf_to_doi(filepath, maxlines=None):
         return None
 
 
-def validate_doi(doi):
+def validate_doi(doi: str) -> Optional[str]:
     """We check that the DOI can be resolved by
     `official means <http://www.doi.org/factsheets/DOIProxy.html>`_. If so, we
     return the resolved URL, otherwise, we return ``None`` (which means the
@@ -71,7 +74,7 @@ def validate_doi(doi):
         raise ValueError('Something unexpected happened')
 
 
-def get_clean_doi(doi):
+def get_clean_doi(doi: str) -> str:
     """Check if the DOI is actually a URL and in that case just get
     the exact DOI.
 
@@ -87,7 +90,7 @@ def get_clean_doi(doi):
     return doi
 
 
-def find_doi_in_text(text):
+def find_doi_in_text(text: str) -> Optional[str]:
     """Try to find a DOI in a text.
 
     :param text: Text in which to look for DOI.
@@ -119,7 +122,7 @@ def find_doi_in_text(text):
     return None
 
 
-def get_real_url_from_doi(doi):
+def get_real_url_from_doi(doi: str) -> Optional[str]:
     """Get a URL corresponding to a DOI.
 
     :param doi: Identifier.

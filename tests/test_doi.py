@@ -9,12 +9,12 @@ from doi import (
 )
 
 
-def test_valid_version():
+def test_valid_version() -> None:
     """Check that the package defines a valid __version__"""
     assert parse_version(__version__) >= parse_version("0.1.0")
 
 
-def test_validate_doi():
+def test_validate_doi() -> None:
     data = [
         ('10.1063/1.5081715',
             'http://aip.scitation.org/doi/10.1063/1.5081715'),
@@ -29,25 +29,26 @@ def test_validate_doi():
             'https://linkinghub.elsevier.com/retrieve/pii/S0009261497040141'),
     ]
     for doi, url in data:
-        assert(url == validate_doi(doi))
+        assert url == validate_doi(doi)
 
     for doi in ['', 'asdf']:
         try:
             validate_doi(doi)
         except ValueError as e:
-            assert(str(e) == 'HTTP 404: DOI not found')
+            assert str(e) == 'HTTP 404: DOI not found'
 
-def test_get_real_url_from_doi():
+
+def test_get_real_url_from_doi() -> None:
     data = [
         ('10.1016/S0009-2614(97)04014-1',
          'https://www.sciencedirect.com/science/'
          'article/abs/pii/S0009261497040141'),
     ]
     for doi, url in data:
-        assert(url == get_real_url_from_doi(doi))
+        assert url == get_real_url_from_doi(doi)
 
 
-def test_find_doi_in_line():
+def test_find_doi_in_line() -> None:
     test_data = [
         ('http://dx.doi.org/10.1063/1.881498', '10.1063/1.881498'),
         ('http://dx.doi.org/10.1063%2F1.881498', '10.1063/1.881498'),
@@ -61,8 +62,8 @@ def test_find_doi_in_line():
         ('/scitation.org/doi/10.1063/1.88149 8?234saf=34', '10.1063/1.88149'),
         ('/scitation.org/doi/10.1063/1.uniau12?as=234',
             '10.1063/1.uniau12'),
-        ('https://doi.org/10.1093/analys/anw053' , '10.1093/analys/anw053'),
-        ('http://.scitation.org/doi/10.1063/1.mart(88)1498?asdfwer' ,
+        ('https://doi.org/10.1093/analys/anw053', '10.1093/analys/anw053'),
+        ('http://.scitation.org/doi/10.1063/1.mart(88)1498?asdfwer',
             '10.1063/1.mart(88)1498'),
         ('@ibook{doi:10.1002/9780470125915.ch2,', '10.1002/9780470125915.ch2'),
         ('<rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements/1'
@@ -78,10 +79,11 @@ def test_find_doi_in_line():
         ('doi(10.1038/s41535-018-0103-6;)', '10.1038/s41535-018-0103-6'),
     ]
     for url, doi in test_data:
-        assert(find_doi_in_text(url) == doi)
+        assert find_doi_in_text(url) == doi
 
 
-def test_doi_from_pdf():
+def test_doi_from_pdf() -> None:
     f = os.path.join(os.path.dirname(__file__), 'resources', 'doc.pdf')
-    assert(os.path.exists(f))
-    assert(pdf_to_doi(f) == '10.1103/PhysRevLett.50.1998')
+
+    assert os.path.exists(f)
+    assert pdf_to_doi(f) == '10.1103/PhysRevLett.50.1998'
