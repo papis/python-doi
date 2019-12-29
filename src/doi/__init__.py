@@ -43,7 +43,7 @@ def validate_doi(doi: str) -> Optional[str]:
     :param doi: Identifier.
     :returns: The URL assigned to the DOI or ``None``.
     """
-    from urllib.error import HTTPError, URLError
+    from urllib.error import HTTPError
     import urllib.request
     import urllib.parse
     import json

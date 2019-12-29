@@ -66,7 +66,7 @@ def test_find_doi_in_line() -> None:
         ('http://.scitation.org/doi/10.1063/1.mart(88)1498?asdfwer',
             '10.1063/1.mart(88)1498'),
         ('@ibook{doi:10.1002/9780470125915.ch2,', '10.1002/9780470125915.ch2'),
-        ('<rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements/1'
+        ('<rdf:Description rdf:about="" xmlns:dc="http://purl.org/dc/elements'
          '.1/"><dc:format>application/pdf</dc:format><dc:identifier>'
          'doi:10.1063/1.5079474</dc:identifier></rdf:Description>',
             '10.1063/1.5079474'),
