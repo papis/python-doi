@@ -53,25 +53,12 @@ def validate_doi(doi: str) -> Optional[str]:
 
     try:
         result = json.loads(urllib.request.urlopen(request).read().decode())
-        if 'values' in result:
-            urls = [v['data']['value']
-                    for v in result['values'] if v.get('type') == 'URL']
-            return urls[0] if urls else None
     except HTTPError:
         raise ValueError('HTTP 404: DOI not found')
-    except URLError as e:
-        raise ValueError(e)
-
-    response_code = int(result["responseCode"])
-    if response_code in [1, 200]:
-        # HTTP 200 all ok
-        logger.debug('HTTP 200: valid doi')
-    elif response_code == 2:
-        raise ValueError('HTTP 500: Interal DOI server error')
-    elif response_code == 100:
-        raise ValueError('HTTP 404: DOI not found')
     else:
-        raise ValueError('Something unexpected happened')
+        urls = [v['data']['value']
+                for v in result['values'] if v.get('type') == 'URL']
+        return urls[0] if urls else None
 
 
 def get_clean_doi(doi: str) -> str:
