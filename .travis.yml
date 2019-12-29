@@ -13,5 +13,6 @@ install:
 
 script:
   - py.test --doctest-modules --cov=doi src tests
+  - mypy src/ tests
 after_success:
   - coveralls

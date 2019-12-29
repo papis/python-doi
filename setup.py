@@ -22,8 +22,9 @@ requirements = []
 
 dev_requirements = [
     'coverage', 'pytest', 'pytest-cov==2.5.0', 'twine', 'pep8',
-    'flake8', 'wheel',
-    'sphinx', 'sphinx-autobuild', 'sphinx-autodoc-typehints', 'sphinx_rtd_theme']
+    'flake8', 'wheel', 'mypy',
+    'sphinx', 'sphinx-autobuild', 'sphinx-autodoc-typehints',
+    'sphinx_rtd_theme']
 
 version = get_version('./src/doi/__init__.py')
 
